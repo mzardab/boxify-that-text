@@ -2,7 +2,7 @@ body
 {
   width: 900px;
   margin:auto;
-  font-family: 'Open Sans', sans-serif;
+  font-family: 'Roboto', sans-serif;
 }
 
 body > h1
@@ -26,7 +26,7 @@ h2
   padding:5px;
   min-height:100px;
 
-  border: 1px solid black;
+  box-shadow: 1px 1px 7px 0px #888888;
 }
 
 #output
@@ -37,7 +37,7 @@ h2
   padding:5px;
   float:left;
 
-  box-shadow: 5px 5px 2px #888888;
+  box-shadow: 1px 1px 7px 0px #888888;
 }
 
 #control-panel
@@ -48,5 +48,5 @@ h2
   padding:5px;
   float:right;
 
-  border: 1px solid black;
+  box-shadow: 1px 1px 7px 0px #888888;
 }
