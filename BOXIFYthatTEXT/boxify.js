@@ -6,7 +6,7 @@ submit button to convert to array
 */
 
 //GLOBAL CONFIG VAR
-function newBox(targetId, boxId)
+function newBox(targetId, boxId, config)
   {
     var buttonId = boxId + "-button"; //creates unique signifier for button
     var listId = boxId + "-list"; //creates unique signifier for list
@@ -24,6 +24,7 @@ function newBox(targetId, boxId)
     addButton.setAttribute("value", "ADD");
     addButton.setAttribute("class", "boxify-text-add-button")
     addButton.setAttribute("parent-text-box", targetId);
+    addButton.innerHTML = "ADD";
 
     var listWrapper = document.createElement("DIV");
     listWrapper.setAttribute("id", listId);
@@ -33,34 +34,24 @@ function newBox(targetId, boxId)
     document.getElementById(targetId).appendChild(listWrapper);
 
 
-
+    //Define form Submit buttom
 
     //Defining listener for Add BUTTON
-    document.getElementById(buttonId).onclick = function() {
+    document.getElementById(buttonId).onclick = function()
+    {
+      var text = document.getElementById(boxId).value;
+      var list = document.createElement("LI");
 
-    var text = document.getElementById(boxId).value;
-    var list = document.createElement("LI");
-    list.setAttribute("class", "willy");
-    list.setAttribute("value", text);
+      list.setAttribute("class", "willy");
+      list.innerHTML = text;
+      document.getElementById(listId).appendChild(list); //appends to list
+    };
 
-    list.innerHTML = text;
-    //var li = "<li>" + text + "</li>";
-    document.getElementById(listId).appendChild(list);
-}
-};
 
-function listElement(parentBox, data)
-{
-
-}
-
-function listElementTemplate() //list elements for deletion
-{
-
-}
-
-function submitForm()
-{
-  //use nodelist to submit to array?
-  var outputArray = listItems;
+    /** CONFIG VAR */
+    if(config["display-list"] == false) //if display list is off, hide list
+    {
+      document.getElementById(listId).style.display = "none";
+    console.log(config["display-list"]);
+    };
 };
