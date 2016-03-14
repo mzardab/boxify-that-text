@@ -10,7 +10,7 @@ function newBox(targetId, boxId, config)
   {
     var buttonId = boxId + "-button"; //creates unique signifier for button
     var listId = boxId + "-list"; //creates unique signifier for list
-    var submitId = boxId = "-submit";
+    var submitId = boxId + "-submit";
     var listCounter = 0;
 
     var box = document.createElement("INPUT"); //create textbox
@@ -85,12 +85,13 @@ function newBox(targetId, boxId, config)
     document.getElementById(submitId).onclick = function()
     {
       var arrayOutput = [];
+      console.log("ping");
       var listHolder = document.getElementById(listId).getElementsByTagName("li");
 
       for(var i=0, im=listHolder.length; im>i; i++)
-        text.push(lis[i].firstChild.nodeValue);
+        arrayOutput.push(listHolder[i].firstChild.nodeValue);
 
-      alert(texts);
+      alert(arrayOutput);
     };
 
 
