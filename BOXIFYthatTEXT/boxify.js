@@ -40,7 +40,7 @@ function newBox(targetId, boxId, config)
     submitButton.setAttribute("parent-text-box", targetId);
     submitButton.innerHTML = "SUBMIT";
 
-
+    //Appends textbox elements to html file
     document.getElementById(targetId).appendChild(box);
     document.getElementById(targetId).appendChild(addButton);
     document.getElementById(targetId).appendChild(listWrapper);
@@ -72,23 +72,30 @@ function newBox(targetId, boxId, config)
         listCounter++;
         document.getElementById(boxId).value = []; //reset text box
       };
-
       //Defining listener for Delete BUTTON
       document.getElementById("delete-element").onclick = function()
-      {
-        var target = this.getAttribute("parent-div");
-        document.getElementById(target).innerHTML = [];
-      };
+          {
+              var target = this.getAttribute("parent-div");
+              document.getElementById(target).remove();
+          };
     };
+
 
     //Defining listener for Submit BUTTON
     document.getElementById(submitId).onclick = function()
     {
+      var arrayOutput = [];
+      var listHolder = document.getElementById(listId).getElementsByTagName("li");
 
+      for(var i=0, im=listHolder.length; im>i; i++)
+        text.push(lis[i].firstChild.nodeValue);
+
+      alert(texts);
     };
 
 
     /** CONFIG VAR */
+    //Can add more functionality through here
     if(config == undefined){ //if config param empty
         return 0;
     }
@@ -97,4 +104,16 @@ function newBox(targetId, boxId, config)
       document.getElementById(listId).style.display = "none";
       console.log(config["display-list"]);
     };
+
+    //Function to delete List Items in Javascript without jquery (tricky!)
+    Element.prototype.remove = function() {
+    this.parentElement.removeChild(this);
+    }
+    NodeList.prototype.remove = HTMLCollection.prototype.remove = function() {
+        for(var i = this.length - 1; i >= 0; i--) {
+            if(this[i] && this[i].parentElement) {
+                this[i].parentElement.removeChild(this[i]);
+            }
+        }
+    }
 };
