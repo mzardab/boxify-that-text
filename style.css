@@ -56,3 +56,13 @@ h2
   width:50px;
   height:20px;
 }
+
+#text-box
+{
+  width: 500px;
+  margin: auto;
+}
+
+input[type="text"]#searchbox {
+    border: 1px solid #888888;
+}
