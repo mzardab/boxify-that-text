@@ -10,6 +10,8 @@ function newBox(targetId, boxId, config)
   {
     var buttonId = boxId + "-button"; //creates unique signifier for button
     var listId = boxId + "-list"; //creates unique signifier for list
+    var submitId = boxId = "-submit";
+    var listCounter = 0;
 
     var box = document.createElement("INPUT"); //create textbox
     box.setAttribute("type", "text");
@@ -29,29 +31,70 @@ function newBox(targetId, boxId, config)
     var listWrapper = document.createElement("DIV");
     listWrapper.setAttribute("id", listId);
 
+    //Define form Submit buttom
+    var submitButton = document.createElement("BUTTON");
+    submitButton.setAttribute("id", submitId);
+    submitButton.setAttribute("type", "BUTTON");
+    submitButton.setAttribute("value", "SUBMIT");
+    submitButton.setAttribute("class", "boxify-text-submit-button")
+    submitButton.setAttribute("parent-text-box", targetId);
+    submitButton.innerHTML = "SUBMIT";
+
+
     document.getElementById(targetId).appendChild(box);
     document.getElementById(targetId).appendChild(addButton);
     document.getElementById(targetId).appendChild(listWrapper);
+    document.getElementById(targetId).appendChild(submitButton);
 
-
-    //Define form Submit buttom
 
     //Defining listener for Add BUTTON
     document.getElementById(buttonId).onclick = function()
     {
       var text = document.getElementById(boxId).value;
       var list = document.createElement("LI");
+      list.setAttribute("class", "list-elements");
+      list.setAttribute("id", listCounter);
 
-      list.setAttribute("class", "willy");
-      list.innerHTML = text;
-      document.getElementById(listId).appendChild(list); //appends to list
+      var deleteButton = document.createElement("BUTTON");
+      deleteButton.setAttribute("id", "delete-element");
+      deleteButton.innerHTML = "DELETE";
+      deleteButton.setAttribute("parent-div", listCounter);
+
+      if(text == []) //check if box is empty
+      {
+        console.log('Textbox empty');
+        alert("Can't BOXIFYtheTEXT(tm) if the box is empty!");
+        return 0;
+      }else{
+        list.innerHTML = text;
+        document.getElementById(listId).appendChild(list); //appends to list
+        document.getElementById(listCounter).appendChild(deleteButton);
+        listCounter++;
+        document.getElementById(boxId).value = []; //reset text box
+      };
+
+      //Defining listener for Delete BUTTON
+      document.getElementById("delete-element").onclick = function()
+      {
+        var target = this.getAttribute("parent-div");
+        document.getElementById(target).innerHTML = [];
+      };
+    };
+
+    //Defining listener for Submit BUTTON
+    document.getElementById(submitId).onclick = function()
+    {
+
     };
 
 
     /** CONFIG VAR */
-    if(config["display-list"] == false) //if display list is off, hide list
+    if(config == undefined){ //if config param empty
+        return 0;
+    }
+    elseif(config["display-list"] == false)
     {
       document.getElementById(listId).style.display = "none";
-    console.log(config["display-list"]);
+      console.log(config["display-list"]);
     };
 };
